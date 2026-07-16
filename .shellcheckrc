@@ -1,0 +1,7 @@
+# ShellCheck configuration for the Debian Admin Toolkit.
+shell=bash
+external-sources=true
+# Resolve "# shellcheck source=lib/*.sh" directives from the repository root,
+# regardless of which script is being checked.
+source-path=SCRIPTDIR
+source-path=SCRIPTDIR/..
