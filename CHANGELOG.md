@@ -8,6 +8,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Network module (`modules/20-network.sh`): IP addresses and interfaces,
+  gateway and routing, DNS/resolver, firewall status (ufw/nftables/iptables),
+  SSH server status and effective config, xrdp service, listening ports
+  (ss/netstat), plus interactive ping and single-port TCP checks, and a
+  combined read-only report
+- `ui_input` dialog helper (whiptail inputbox with text fallback)
 - System information module (`modules/10-system.sh`): Debian/OS release,
   kernel, CPU, RAM/swap, BIOS and mainboard (dmidecode), temperatures
   (lm-sensors with a `/sys` thermal-zone fallback), disks and filesystems,

@@ -99,6 +99,28 @@ ui_yesno() {
     fi
 }
 
+# ui_input <title> <prompt> [default] - Prompt for a single line of text.
+# Prints the entered value on stdout. Returns 1 when the user cancels.
+ui_input() {
+    local title="$1"
+    local prompt="$2"
+    local default="${3:-}"
+
+    if [[ "${DAT_UI_ACTIVE}" == "whiptail" ]]; then
+        whiptail --title "${title}" --inputbox "${prompt}" \
+            "${_DAT_UI_HEIGHT}" "${_DAT_UI_WIDTH}" "${default}" \
+            3>&1 1>&2 2>&3
+        return $?
+    fi
+
+    local reply
+    if ! read -r -p "${prompt} " reply; then
+        printf '\n' >&2
+        return 1
+    fi
+    printf '%s' "${reply:-${default}}"
+}
+
 # ui_menu <title> <prompt> <tag> <label> [<tag> <label> ...]
 # Show a selection menu. Prints the chosen tag on stdout.
 # Returns 1 when the user cancels.
