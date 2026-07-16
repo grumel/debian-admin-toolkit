@@ -8,6 +8,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Release automation: `packaging/build-tarball.sh` builds a clean source
+  tarball, and `.github/workflows/release.yml` runs on version tags to lint,
+  test, verify the tag matches `VERSION`, build the tarball, extract the
+  changelog section and publish a GitHub Release. Documented in
+  `docs/releasing.md`
 - Reports module (`modules/60-reports.sh`): generate self-contained HTML
   reports — hardware inventory, network inventory and a combined diagnostic
   report — saved to a chosen directory. Reports reuse the read-only

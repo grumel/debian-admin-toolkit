@@ -1,0 +1,67 @@
+---
+name: Release
+
+# Build a source tarball and publish a GitHub Release whenever a version tag
+# (e.g. v1.0.0) is pushed. The tag must match the VERSION file.
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Build and publish release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install ShellCheck
+        run: sudo apt-get update && sudo apt-get install -y shellcheck
+
+      - name: Lint (ShellCheck)
+        run: |
+          find . -name '*.sh' -not -path './.git/*' -print0 \
+            | xargs -0 shellcheck --shell=bash --external-sources
+
+      - name: Test
+        run: bash tests/run_tests.sh
+
+      - name: Verify tag matches VERSION
+        run: |
+          tag="${GITHUB_REF_NAME#v}"
+          version="$(tr -d '[:space:]' < VERSION)"
+          if [ "${tag}" != "${version}" ]; then
+            echo "Tag ${GITHUB_REF_NAME} does not match VERSION (${version})." >&2
+            exit 1
+          fi
+
+      - name: Build source tarball
+        run: |
+          version="$(tr -d '[:space:]' < VERSION)"
+          pkg="debian-admin-toolkit-${version}"
+          bash packaging/build-tarball.sh "dist"
+          ls -l dist/
+          echo "PKG=${pkg}" >> "${GITHUB_ENV}"
+
+      - name: Extract changelog for this version
+        run: |
+          version="$(tr -d '[:space:]' < VERSION)"
+          # Pull the section for this version (or Unreleased) from CHANGELOG.md.
+          awk -v ver="${version}" '
+            /^## / { if (p) exit; if ($0 ~ "\\[" ver "\\]" || $0 ~ /\[Unreleased\]/) { p=1; next } }
+            p { print }
+          ' CHANGELOG.md > release-notes.md
+          echo "----- release notes -----"
+          cat release-notes.md
+
+      - name: Create GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "${GITHUB_REF_NAME}" \
+            --title "Debian Admin Toolkit ${GITHUB_REF_NAME}" \
+            --notes-file release-notes.md \
+            dist/*.tar.gz
