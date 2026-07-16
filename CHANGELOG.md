@@ -8,6 +8,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- System information module (`modules/10-system.sh`): Debian/OS release,
+  kernel, CPU, RAM/swap, BIOS and mainboard (dmidecode), temperatures
+  (lm-sensors with a `/sys` thermal-zone fallback), disks and filesystems,
+  and SMART health (smartmontools). Read-only; optional tools are detected
+  at runtime and missing ones produce a hint instead of an error
 - Framework libraries: core helpers, leveled logging, safe config parsing,
   whiptail UI with plain-text fallback, module/plugin loader (`lib/`)
 - Main entry point `admin.sh` with `--help`, `--version`, `--list`,
