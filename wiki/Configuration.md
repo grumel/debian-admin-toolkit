@@ -86,19 +86,29 @@ dat --debug network
 
 ## Checking what is active
 
-Run with `--debug`; the startup lines report the chosen UI backend, the
-discovered modules and the install root:
+Run with `--debug`; the startup lines report which config files were loaded,
+the chosen UI backend, the discovered modules and the install root:
 
 ```bash
 dat --debug --list
 ```
 
 ```text
+[debug] Loading configuration from /opt/debian-admin-toolkit/config/dat.conf
+[debug] Loading configuration from /home/you/.config/dat/dat.conf
 [debug] UI backend: whiptail (94x30)
 [debug] Registered module 'system' from /opt/debian-admin-toolkit/modules/10-system.sh
 ...
-[debug] Debian Admin Toolkit 1.0.0 started (root: /opt/debian-admin-toolkit)
+[debug] Debian Admin Toolkit 1.0.1 started (root: /opt/debian-admin-toolkit)
 ```
+
+Only files that exist are listed, so this is the quickest way to see whether
+your override file is being picked up at all.
+
+`--debug` always wins over a `DAT_LOG_LEVEL` set in a config file.
 
 An invalid key or value in a config file is reported as a `[warn]` line at
 startup, whatever the log level.
+
+> The config-loading lines require **1.0.1 or newer**. In 1.0.0 the
+> `--debug` flag was applied too late to cover them.

@@ -10,7 +10,7 @@ Everything runs from one command:
 dat
 ```
 
-**Current release:** [v1.0.0](https://github.com/grumel/debian-admin-toolkit/releases/tag/v1.0.0)
+**Current release:** [v1.0.1](https://github.com/grumel/debian-admin-toolkit/releases/tag/v1.0.1)
 
 ## Start here
 

@@ -21,7 +21,7 @@ Download the `.deb` from the
 and install it with `apt`, which pulls in the dependencies:
 
 ```bash
-sudo apt install ./debian-admin-toolkit_1.0.0_all.deb
+sudo apt install ./debian-admin-toolkit_1.0.1_all.deb
 ```
 
 This installs:
@@ -76,7 +76,7 @@ The toolkit runs straight from a checkout:
 ## Verify
 
 ```bash
-dat --version   # -> 1.0.0
+dat --version   # -> 1.0.1
 dat --list      # lists the available modules
 ```
 

@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.1] - 2026-07-16
+
+Documentation release: a user handbook published as the project wiki, plus a
+fix for `--debug`.
+
 ### Added
 - User handbook as wiki sources under `wiki/` (Home, Installation, Usage,
   Modules, Configuration, Writing Plugins, Troubleshooting, FAQ, sidebar),
@@ -14,6 +19,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `scripts/sync-wiki.sh` to publish `wiki/` to the GitHub wiki, with a
   `--dry-run` mode. Authenticates via `GITHUB_TOKEN` when set (for CI) and
   via the local git credential helper otherwise
+- `.github/workflows/wiki.yml`: publish the wiki automatically when the
+  handbook changes on `main`, plus a manual `workflow_dispatch` trigger
 
 ### Fixed
 - `--debug` now also logs the configuration loading. The flag was applied
