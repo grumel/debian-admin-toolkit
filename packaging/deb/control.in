@@ -1,0 +1,16 @@
+Package: debian-admin-toolkit
+Version: @VERSION@
+Section: admin
+Priority: optional
+Architecture: all
+Depends: bash (>= 5.0), whiptail
+Recommends: dmidecode, lm-sensors, smartmontools, iproute2, fontconfig
+Maintainer: grumel <grumel@gmail.com>
+Homepage: https://github.com/grumel/debian-admin-toolkit
+Description: Modular administration toolkit for Debian
+ Debian Admin Toolkit (DAT) is a modular, whiptail-based administration
+ toolkit for Debian 12 and Debian 13, for desktops and servers.
+ .
+ It bundles modules for system information, networking, desktop tweaks,
+ software installation, maintenance and HTML reporting, and supports drop-in
+ plugins. The toolkit is started with the "dat" command.

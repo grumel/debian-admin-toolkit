@@ -37,16 +37,20 @@ The release workflow then:
    fails the release if they differ.
 3. Builds a source tarball with
    [`packaging/build-tarball.sh`](../packaging/build-tarball.sh)
-   (`debian-admin-toolkit-<version>.tar.gz`).
+   (`debian-admin-toolkit-<version>.tar.gz`) and a `.deb` package with
+   [`packaging/build-deb.sh`](../packaging/build-deb.sh)
+   (`debian-admin-toolkit_<version>_all.deb`).
 4. Extracts the matching section from `CHANGELOG.md` as the release notes.
-5. Publishes a GitHub Release with the tarball attached.
+5. Publishes a GitHub Release with the tarball and the `.deb` attached.
 
-## Building a tarball locally
+## Building packages locally
 
 ```bash
+# Source tarball (unpacks into debian-admin-toolkit-<version>/):
 bash packaging/build-tarball.sh dist
-# -> dist/debian-admin-toolkit-<version>.tar.gz
-```
 
-The archive unpacks into a single `debian-admin-toolkit-<version>/`
-directory containing everything needed to run `./install.sh`.
+# Debian package (requires dpkg-dev; installs to /opt with a /usr/bin/dat
+# launcher and a manual page):
+bash packaging/build-deb.sh dist
+sudo apt install ./dist/debian-admin-toolkit_<version>_all.deb
+```

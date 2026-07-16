@@ -1,0 +1,81 @@
+.TH DAT 1 "2026-07-16" "Debian Admin Toolkit" "User Commands"
+.SH NAME
+dat \- Debian Admin Toolkit, a modular administration toolkit for Debian
+.SH SYNOPSIS
+.B dat
+.RI [ OPTION ]
+.RI [ MODULE ]
+.SH DESCRIPTION
+.B dat
+is the launcher for the Debian Admin Toolkit (DAT), a modular,
+whiptail-based administration toolkit for Debian 12 and Debian 13, usable on
+desktops and servers.
+.PP
+Without arguments it starts an interactive main menu. With a module id it
+runs a single module directly. The toolkit ships modules for system
+information, networking, desktop tweaks, software installation, maintenance
+and HTML reporting, and it can be extended with drop-in plugins.
+.SH OPTIONS
+.TP
+.B \-\-list, \-l
+List available modules and plugins, then exit.
+.TP
+.B \-\-version, \-V
+Print the toolkit version and exit.
+.TP
+.B \-\-debug
+Enable debug logging for this run.
+.TP
+.B \-\-help, \-h
+Show usage information and exit.
+.SH MODULES
+Run
+.B dat \-\-list
+to see the installed modules. Built-in modules include
+.BR system ,
+.BR network ,
+.BR desktop ,
+.BR software ,
+.BR maintenance " and"
+.BR reports .
+A module is run directly with, for example,
+.BR "dat system" .
+.SH CONFIGURATION
+Defaults ship in
+.IR /opt/debian-admin-toolkit/config/dat.conf .
+They can be overridden system-wide in
+.I /etc/dat/dat.conf
+and per user in
+.IR ~/.config/dat/dat.conf .
+Recognised keys are
+.BR DAT_LOG_LEVEL " (debug|info|warn|error),"
+.BR DAT_LOG_DIR " and"
+.BR DAT_UI_BACKEND " (auto|whiptail|text)."
+.SH FILES
+.TP
+.I /opt/debian-admin-toolkit
+Installed toolkit files (package install).
+.TP
+.I ~/.config/dat/dat.conf
+Per-user configuration.
+.TP
+.I ~/.local/state/dat/dat.log
+Default log file when the install directory is not writable.
+.SH PLUGINS
+Copy a single
+.I .sh
+file with a
+.B # DAT-MODULE
+metadata header into the
+.I plugins/
+directory to add a module. See
+.I /opt/debian-admin-toolkit/docs/modules.md
+for the format.
+.SH EXIT STATUS
+Returns 0 on success and non-zero on error.
+.SH SEE ALSO
+Project home page:
+.UR https://github.com/grumel/debian-admin-toolkit
+.UE
+.SH AUTHOR
+grumel <grumel@gmail.com>

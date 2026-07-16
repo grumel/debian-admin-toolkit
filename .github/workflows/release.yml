@@ -38,13 +38,12 @@ jobs:
             exit 1
           fi
 
-      - name: Build source tarball
+      - name: Build source tarball and .deb package
         run: |
-          version="$(tr -d '[:space:]' < VERSION)"
-          pkg="debian-admin-toolkit-${version}"
+          sudo apt-get install -y dpkg-dev
           bash packaging/build-tarball.sh "dist"
+          bash packaging/build-deb.sh "dist"
           ls -l dist/
-          echo "PKG=${pkg}" >> "${GITHUB_ENV}"
 
       - name: Extract changelog for this version
         run: |
@@ -64,4 +63,4 @@ jobs:
           gh release create "${GITHUB_REF_NAME}" \
             --title "Debian Admin Toolkit ${GITHUB_REF_NAME}" \
             --notes-file release-notes.md \
-            dist/*.tar.gz
+            dist/*.tar.gz dist/*.deb
