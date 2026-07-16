@@ -8,7 +8,7 @@ A modular administration toolkit for **Debian 12 (Bookworm)** and
 whiptail menu, and a plugin system: drop a single file into `plugins/` and
 it appears in the menu.
 
-> 🚧 Under active development — see the [roadmap](#roadmap).
+> ✅ **Version 1.0** — all roadmap phases complete. See the [roadmap](#roadmap).
 
 ## Features
 
@@ -22,6 +22,18 @@ it appears in the menu.
 
 ## Installation
 
+### Debian package (recommended)
+
+Download the `.deb` from the [latest release](https://github.com/grumel/debian-admin-toolkit/releases)
+and install it — this pulls in dependencies, adds the `dat` launcher and a
+`dat(1)` man page:
+
+```bash
+sudo apt install ./debian-admin-toolkit_<version>_all.deb
+```
+
+### From source
+
 ```bash
 git clone https://github.com/grumel/debian-admin-toolkit.git
 cd debian-admin-toolkit
@@ -33,7 +45,9 @@ sudo ./install.sh
 ./install.sh --user
 ```
 
-Uninstall with `sudo ./uninstall.sh` (or `./uninstall.sh --user`).
+Uninstall the source install with `sudo ./uninstall.sh` (or
+`./uninstall.sh --user`); remove the package with
+`sudo apt remove debian-admin-toolkit`.
 
 ## Usage
 
@@ -68,15 +82,15 @@ Copy one `.sh` file into `plugins/` — done. Format and rules:
 | Phase | Scope                                                            | Status |
 |-------|------------------------------------------------------------------|--------|
 | 1     | Repository, framework, installer                                 | ✅     |
-| 2     | System module (OS, kernel, CPU, RAM, BIOS, temps, disks, SMART)  | 🔜     |
-| 3     | Network (IP, DNS, firewall, SSH, xrdp, diagnostics, port scan)   | ⬜     |
-| 4     | Desktop (GNOME, KDE, XFCE, themes, fonts, dark mode)             | ⬜     |
-| 5     | Software installation (Git, VS Code, Docker, browsers, …)        | ⬜     |
-| 6     | Maintenance (updates, cleanup, journal, backups)                 | ⬜     |
-| 7     | Plugin system polish                                             | ⬜     |
-| 8     | HTML reports (hardware, network, diagnostics)                    | ⬜     |
-| 9     | CI/CD releases                                                   | ⬜     |
-| 10    | Version 1.0: deb package, wiki, release                          | ⬜     |
+| 2     | System module (OS, kernel, CPU, RAM, BIOS, temps, disks, SMART)  | ✅     |
+| 3     | Network (IP, DNS, firewall, SSH, xrdp, diagnostics, port scan)   | ✅     |
+| 4     | Desktop (GNOME, KDE, XFCE, themes, fonts, dark mode)             | ✅     |
+| 5     | Software installation (Git, VS Code, Docker, browsers, …)        | ✅     |
+| 6     | Maintenance (updates, cleanup, journal, backups)                 | ✅     |
+| 7     | Plugin system polish                                             | ✅     |
+| 8     | HTML reports (hardware, network, diagnostics)                    | ✅     |
+| 9     | CI/CD releases                                                   | ✅     |
+| 10    | Version 1.0: deb package, man page, release                      | ✅     |
 
 ## Development
 

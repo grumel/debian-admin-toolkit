@@ -7,7 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.0] - 2026-07-16
+
+First stable release. Complete modular toolkit covering system, network,
+desktop, software, maintenance and reporting, with a plugin system, CI and
+packaging (source tarball and `.deb`).
+
 ### Added
+- Debian package build (`packaging/build-deb.sh`, `packaging/deb/control.in`)
+  installing to `/opt/debian-admin-toolkit` with a `/usr/bin/dat` launcher
+  and a `dat(1)` manual page (`docs/dat.1`); the release workflow attaches
+  the `.deb` alongside the source tarball
 - Release automation: `packaging/build-tarball.sh` builds a clean source
   tarball, and `.github/workflows/release.yml` runs on version tags to lint,
   test, verify the tag matches `VERSION`, build the tarball, extract the
@@ -62,7 +72,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   override locations
 - Test suite (`tests/`) with syntax, framework and CLI checks
 - GitHub Actions CI: ShellCheck and tests on every push and pull request
-- Documentation: architecture overview and module developer guide (`docs/`)
+- Documentation: architecture overview, module developer guide and release
+  guide (`docs/`)
 
 ## [0.1.0-dev] - 2026-07-16
 
