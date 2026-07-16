@@ -96,7 +96,12 @@ desk_appearance() {
         *)
             printf 'No supported desktop environment detected.\n'
             printf 'Installed GTK theme directories:\n'
-            ls -1 /usr/share/themes 2>/dev/null | head -n 20 || printf '  none\n'
+            if [[ -d /usr/share/themes ]]; then
+                find /usr/share/themes -maxdepth 1 -mindepth 1 -type d \
+                    -printf '  %f\n' 2>/dev/null | sort | head -n 20
+            else
+                printf '  none\n'
+            fi
             ;;
     esac
 }
