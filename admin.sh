@@ -93,6 +93,12 @@ main() {
     done
 
     # Initialise the framework.
+    # --debug is applied twice on purpose: before config_load so that loading
+    # the configuration is logged too, and again afterwards so the command
+    # line flag always beats a DAT_LOG_LEVEL coming from a config file.
+    # Messages logged before log_init only reach the terminal, because the
+    # log file location itself depends on the configuration.
+    (( debug )) && DAT_LOG_LEVEL="debug"
     config_load
     (( debug )) && DAT_LOG_LEVEL="debug"
     log_init

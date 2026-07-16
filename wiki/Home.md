@@ -55,3 +55,10 @@ Deeper, code-level docs live in the repository:
 ## License
 
 [MIT](https://github.com/grumel/debian-admin-toolkit/blob/main/LICENSE)
+
+---
+
+> ℹ️ **This wiki is generated.** Its pages are published automatically from
+> the [`wiki/`](https://github.com/grumel/debian-admin-toolkit/tree/main/wiki)
+> directory of the repository. Please propose changes there — edits made
+> directly in the wiki web UI are overwritten by the next sync.

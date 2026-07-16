@@ -15,12 +15,26 @@
 #
 #   https://github.com/grumel/debian-admin-toolkit/wiki  ->  "Create the first page"
 #
-# Authentication uses the gh CLI's credentials (gh auth login).
+# Authentication:
+#   - locally: the gh CLI's git credential helper (gh auth login)
+#   - in CI:   set GITHUB_TOKEN, which is used for the clone/push
+#
+# The token is never printed; only the token-free URL is logged.
 
 set -euo pipefail
 
 REPO_SLUG="${WIKI_REPO_SLUG:-grumel/debian-admin-toolkit}"
-WIKI_URL="https://github.com/${REPO_SLUG}.wiki.git"
+
+# Token-free URL for log output.
+WIKI_URL_DISPLAY="https://github.com/${REPO_SLUG}.wiki.git"
+
+# URL actually used for git operations. In CI there is no credential helper,
+# so authenticate with the token the workflow provides.
+if [[ -n "${GITHUB_TOKEN:-}" ]]; then
+    WIKI_URL="https://x-access-token:${GITHUB_TOKEN}@github.com/${REPO_SLUG}.wiki.git"
+else
+    WIKI_URL="${WIKI_URL_DISPLAY}"
+fi
 
 REPO_ROOT="$(cd "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")/.." && pwd)"
 SRC_DIR="${REPO_ROOT}/wiki"
@@ -49,13 +63,14 @@ main() {
     WORK_DIR="$(mktemp -d)"
     local clone="${WORK_DIR}/wiki"
 
-    printf 'Cloning %s ...\n' "${WIKI_URL}"
+    printf 'Cloning %s ...\n' "${WIKI_URL_DISPLAY}"
     if ! git clone --quiet "${WIKI_URL}" "${clone}" 2>/dev/null; then
         fail "Could not clone the wiki.
 
-The wiki repository does not exist yet. Open
-  https://github.com/${REPO_SLUG}/wiki
-click \"Create the first page\", save it once, then re-run this script."
+Either the wiki repository does not exist yet, or authentication failed.
+GitHub only creates it after the first page has been saved once via the
+web UI: open https://github.com/${REPO_SLUG}/wiki, click \"Create the first
+page\", save it, then re-run this script."
     fi
 
     # Mirror wiki/ into the clone: copy pages, drop pages that were removed.
@@ -80,7 +95,15 @@ click \"Create the first page\", save it once, then re-run this script."
         return 0
     fi
 
-    git -C "${clone}" commit --quiet \
+    # Commit with the caller's git identity, falling back to a bot identity
+    # when none is configured (the usual case in CI).
+    local -a ident=()
+    if ! git -C "${clone}" config user.email >/dev/null 2>&1; then
+        ident=(-c "user.name=github-actions[bot]"
+               -c "user.email=41898282+github-actions[bot]@users.noreply.github.com")
+    fi
+
+    git -C "${clone}" "${ident[@]}" commit --quiet \
         -m "Sync wiki from repository (dat $(tr -d '[:space:]' < "${REPO_ROOT}/VERSION"))"
     git -C "${clone}" push --quiet origin HEAD
     printf '\nPublished to https://github.com/%s/wiki\n' "${REPO_SLUG}"

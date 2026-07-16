@@ -12,7 +12,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   Modules, Configuration, Writing Plugins, Troubleshooting, FAQ, sidebar),
   versioned and reviewable in the repository
 - `scripts/sync-wiki.sh` to publish `wiki/` to the GitHub wiki, with a
-  `--dry-run` mode
+  `--dry-run` mode. Authenticates via `GITHUB_TOKEN` when set (for CI) and
+  via the local git credential helper otherwise
+
+### Fixed
+- `--debug` now also logs the configuration loading. The flag was applied
+  after `config_load`, so the `Loading configuration from ...` messages were
+  never emitted. It is now applied before *and* after loading, so the flag
+  still beats a `DAT_LOG_LEVEL` set in a config file
 
 ## [1.0.0] - 2026-07-16
 
