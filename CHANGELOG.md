@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- User handbook as wiki sources under `wiki/` (Home, Installation, Usage,
+  Modules, Configuration, Writing Plugins, Troubleshooting, FAQ, sidebar),
+  versioned and reviewable in the repository
+- `scripts/sync-wiki.sh` to publish `wiki/` to the GitHub wiki, with a
+  `--dry-run` mode
+
 ## [1.0.0] - 2026-07-16
 
 First stable release. Complete modular toolkit covering system, network,

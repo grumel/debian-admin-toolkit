@@ -71,6 +71,16 @@ DAT_LOG_LEVEL=info      # debug | info | warn | error
 DAT_UI_BACKEND=auto     # auto | whiptail | text
 ```
 
+## Documentation
+
+- **[Wiki](https://github.com/grumel/debian-admin-toolkit/wiki)** — user
+  handbook: installation, usage, module reference, configuration,
+  troubleshooting and FAQ (sources in [wiki/](wiki/))
+- [docs/architecture.md](docs/architecture.md) — framework internals
+- [docs/modules.md](docs/modules.md) — module/plugin format reference
+- [docs/releasing.md](docs/releasing.md) — CI and release process
+- `man dat` — manual page (installed by the `.deb`)
+
 ## Extending
 
 Copy one `.sh` file into `plugins/` — done. Format and rules:
