@@ -1,0 +1,42 @@
+# Logs
+logs/
+*.log
+
+# Backups
+backups/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Bash
+*.swp
+*~
+
+# VS Code
+.vscode/
+
+# JetBrains
+.idea/
+
+# macOS
+.DS_Store
+
+# Linux
+.directory
+
+# Temporary files
+tmp/
+temp/
+
+# Build artifacts
+dist/
+build/
+
+# Environment
+.env
+
+# Test output
+coverage/
