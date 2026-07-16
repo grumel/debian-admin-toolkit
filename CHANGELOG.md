@@ -8,6 +8,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Software module (`modules/40-software.sh`): guided installation of Git,
+  Python 3 (pip/venv), VS Code, Docker CE, Google Chrome, Firefox ESR and
+  VLC, plus an installation-status overview. Third-party programs (VS Code,
+  Docker, Chrome) set up the vendor APT key and source list first. Every
+  install runs via apt as root only after an explicit confirmation, and
+  already-installed software is detected and skipped
 - Desktop module (`modules/30-desktop.sh`): detects the desktop environment
   (GNOME/KDE/XFCE), reports theme/icon/cursor/font settings and installed
   fonts, and offers reversible per-user tweaks for dark mode and animations
