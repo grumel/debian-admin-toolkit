@@ -1,0 +1,35 @@
+---
+name: Publish wiki
+
+# Mirror the repository's wiki/ directory into the GitHub wiki whenever the
+# handbook changes on main. The wiki sources stay versioned and reviewable in
+# the main repository; this job just publishes them.
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'wiki/**'
+      - 'scripts/sync-wiki.sh'
+      - '.github/workflows/wiki.yml'
+  # Allow a manual re-sync (e.g. after a direct edit in the wiki web UI).
+  workflow_dispatch:
+
+# Only one sync at a time; a newer push supersedes a queued one.
+concurrency:
+  group: publish-wiki
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    name: Sync wiki/ to the GitHub wiki
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Publish
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: bash scripts/sync-wiki.sh
