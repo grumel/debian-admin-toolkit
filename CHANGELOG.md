@@ -8,6 +8,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Maintenance module (`modules/50-maintenance.sh`): refresh package lists,
+  install upgrades, autoremove orphaned packages, clean the apt cache,
+  inspect and vacuum the systemd journal, analyse disk usage (df plus the
+  largest directories), and create timestamped tar.gz backups of `/etc`.
+  System-changing tasks run via sudo only after an explicit confirmation
 - Software module (`modules/40-software.sh`): guided installation of Git,
   Python 3 (pip/venv), VS Code, Docker CE, Google Chrome, Firefox ESR and
   VLC, plus an installation-status overview. Third-party programs (VS Code,
