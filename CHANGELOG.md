@@ -8,6 +8,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Reports module (`modules/60-reports.sh`): generate self-contained HTML
+  reports — hardware inventory, network inventory and a combined diagnostic
+  report — saved to a chosen directory. Reports reuse the read-only
+  collector functions from the system and network modules (no duplication)
+  and HTML-escape all command output
 - Plugin system polish: example plugin template
   (`plugins/hello.sh.example`, inactive until copied to `.sh`) and a
   dedicated plugin test suite (`tests/test_plugins.sh`) that verifies
