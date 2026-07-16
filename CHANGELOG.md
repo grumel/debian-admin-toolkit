@@ -8,6 +8,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Plugin system polish: example plugin template
+  (`plugins/hello.sh.example`, inactive until copied to `.sh`) and a
+  dedicated plugin test suite (`tests/test_plugins.sh`) that verifies
+  drop-in discovery, execution, skipping of broken/duplicate plugins and
+  that the template is not auto-loaded
 - Maintenance module (`modules/50-maintenance.sh`): refresh package lists,
   install upgrades, autoremove orphaned packages, clean the apt cache,
   inspect and vacuum the systemd journal, analyse disk usage (df plus the

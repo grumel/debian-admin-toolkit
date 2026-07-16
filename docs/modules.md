@@ -5,6 +5,15 @@ the same format. To extend the toolkit, copy a single `.sh` file into
 `plugins/` — it appears in the main menu on the next start. No registration,
 no configuration.
 
+A ready-to-use template ships as
+[`plugins/hello.sh.example`](../plugins/hello.sh.example). Only files ending
+in `.sh` are discovered, so the template stays inactive until you copy it:
+
+```bash
+cp plugins/hello.sh.example plugins/hello.sh
+dat --list        # "hello" now appears
+```
+
 ## Module format
 
 A module is a Bash file with a metadata header within its first 20 lines:

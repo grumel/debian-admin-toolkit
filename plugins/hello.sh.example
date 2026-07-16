@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+# DAT-MODULE
+# Id: hello
+# Name: Hello World (example)
+# Description: Example plugin — copy to hello.sh to enable it
+# Entry: module_hello_main
+#
+# This is a template plugin for the Debian Admin Toolkit.
+#
+# To enable it:
+#   cp plugins/hello.sh.example plugins/hello.sh
+#   dat            # "Hello World (example)" now appears in the main menu
+#
+# Only files ending in ".sh" are discovered, so this ".sh.example" file is
+# ignored until you copy it. See docs/modules.md for the full plugin guide.
+
+# module_hello_main - Entry point. Prefix functions with your module id to
+# avoid clashing with the framework or other plugins.
+module_hello_main() {
+    # Framework helpers are available: ui_*, log_*, has_cmd, run_privileged.
+    log_info "hello plugin: started"
+
+    local name
+    name="$(ui_input "Hello" "What is your name?" "world")" || return 0
+    [[ -z "${name}" ]] && name="world"
+
+    ui_msgbox "Hello" "Hello, ${name}!
+
+This message comes from an example DAT plugin.
+Running on: $(uname -srm)"
+}
