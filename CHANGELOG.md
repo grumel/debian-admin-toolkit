@@ -8,6 +8,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Desktop module (`modules/30-desktop.sh`): detects the desktop environment
+  (GNOME/KDE/XFCE), reports theme/icon/cursor/font settings and installed
+  fonts, and offers reversible per-user tweaks for dark mode and animations
+  (GNOME via gsettings; KDE via plasma-apply tools when present). Operates on
+  the current user's session only, never on system-wide configuration
 - Network module (`modules/20-network.sh`): IP addresses and interfaces,
   gateway and routing, DNS/resolver, firewall status (ufw/nftables/iptables),
   SSH server status and effective config, xrdp service, listening ports
